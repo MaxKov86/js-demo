@@ -1,0 +1,27 @@
+.list {
+list-style: none;
+}
+
+.super__puper {
+    display: flex;
+    justify-content: center;
+    color: aqua;
+    font-size: 30px;
+    
+}
+
+a {
+    color: rgb(10, 6, 2);
+    text-decoration: none;
+}
+
+.color-picker__options {
+    display: inline-block;
+    width: 64px;
+    height: 40px;
+    margin: 5px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
