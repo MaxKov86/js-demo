@@ -979,45 +979,140 @@
 //   stringEl.textContent += e.key;
 // });
 
-const productList = [
-  {
-    id: 1,
-    text: 'Milk',
-  },
-  {
-    id: 2,
-    text: 'Water',
-  },
-  {
-    id: 3,
-    text: 'Appel',
-  },
-  {
-    id: 4,
-    text: 'Banana',
-  },
-  {
-    id: 5,
-    text: 'Chocolate',
-  },
-];
-createLi = (id, text) => `<li id="${id}">${text}</li>`;
-function render(products) {
-  return products.map(({ id, text }) => `<li id="${id}">${text}</li>`).join('');
+// const productList = [
+//   {
+//     id: 1,
+//     text: 'Milk',
+//   },
+//   {
+//     id: 2,
+//     text: 'Water',
+//   },
+//   {
+//     id: 3,
+//     text: 'Appel',
+//   },
+//   {
+//     id: 4,
+//     text: 'Banana',
+//   },
+//   {
+//     id: 5,
+//     text: 'Chocolate',
+//   },
+// ];
+// createLi = (id, text) => `<li id="${id}">${text}</li>`;
+// function render(products) {
+//   return products.map(({ id, text }) => `<li id="${id}">${text}</li>`).join('');
+// }
+
+// const listProducts = document.querySelector('.products');
+
+// listProducts.insertAdjacentHTML('beforeend', render(productList));
+
+// const form = document.querySelector('.form');
+// const inputEl = document.querySelector('.input');
+
+// form.addEventListener('submit', onButtonClick);
+
+// function onButtonClick(e) {
+//   e.preventDefault;
+//   const li = `<li id="${inputEl.value}">${inputEl.value}</li>`;
+//   listProducts.insertAdjacentHTML('beforeend', li);
+//   inputEl.value = '';
+// }
+
+// const formEl = document.querySelector('.form');
+// const listResuts = document.querySelector('.search-result');
+
+// formEl.addEventListener('submit', onSearch);
+
+// function onSearch(e) {
+//   e.preventDefault();
+
+//   const form = e.currentTarget;
+//   const searchQuery = form.elements.query.value;
+
+//   fetchVideo(searchQuery).then(({ hits }) => {
+//     const markup = render(hits);
+//     listResuts.innerHTML = markup;
+//   });
+//   form.reset();
+// }
+
+// function fetchVideo(searchQuery) {
+//   return fetch(
+//     `https://pixabay.com/api/videos/?key=32149877-af7e3b83431112ad75fb2fcaa&q=${searchQuery}&type=all`
+//   ).then(res => res.json());
+// }
+
+// function render(hits) {
+//   return hits
+//     .map(
+//       ({
+//         downloads,
+//         likes,
+//         views,
+//         videos: {
+//           large: { url },
+//         },
+//       }) => {
+//         return `<li>
+//       <iframe src="${url}" ></iframe>
+//       <p>Перегляди:${views}</p>
+//       <p>Завантаження:${downloads}</p>
+//       <p>Вподобання:${likes}</p>
+//     </li>`;
+//       }
+//     )
+//     .join('');
+// }
+
+// localStorage.setItem('my-storage', JSON.stringify({ name: 'Max', nickname: 'Maximus' }));
+// const saveData = JSON.parse(localStorage.getItem('my-storage'));
+// console.log(saveData);
+
+// const keys = Object.keys(saveData);
+
+// for (const key of keys) {
+//   // Ключ
+//   console.log(key);
+//   // Значення властивості
+//   console.log(saveData[key]);
+// }
+
+const refs = {
+  form: document.querySelector('.form'),
+  textarea: document.querySelector('.textarea'),
+};
+
+refs.form.addEventListener('submit', onSubmit);
+refs.textarea.addEventListener('input', onTextarea);
+
+const formData = {};
+
+refs.form.addEventListener('input', e => {
+  formData[e.target.name] = e.target.value;
+});
+
+populaTextarea();
+
+function onSubmit(e) {
+  e.preventDefault();
+
+  e.currentTarget.reset();
+  localStorage.removeItem('textarea');
 }
 
-const listProducts = document.querySelector('.products');
+function onTextarea(e) {
+  const textareaValue = e.target.value;
+  localStorage.setItem('textarea', textareaValue);
+}
 
-listProducts.insertAdjacentHTML('beforeend', render(productList));
+function populaTextarea() {
+  const savedMessage = localStorage.getItem('textarea');
 
-const form = document.querySelector('.form');
-const inputEl = document.querySelector('.input');
-
-form.addEventListener('submit', onButtonClick);
-
-function onButtonClick(e) {
-  e.preventDefault;
-  const li = `<li id="${inputEl.value}">${inputEl.value}</li>`;
-  listProducts.insertAdjacentHTML('beforeend', li);
-  inputEl.value = '';
+  if (savedMessage) {
+    refs.textarea.value = savedMessage;
+  }
 }

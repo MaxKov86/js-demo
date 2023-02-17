@@ -25,3 +25,16 @@ a {
     outline: none;
     cursor: pointer;
 }
+
+.form {
+    display: inline-flex;
+    flex-direction: column;
+}
+
+label {
+    margin-top: 10px;
+    
+}
+button{
+    margin-top: 10px;
+}
